@@ -11,31 +11,31 @@ import java.util.Optional;
 
 @Service
 public class BookService {
-    @Autowired
-    BookRepository bookRepository;
+//    @Autowired
+//    BookRepository bookRepository;
     
-    public Book add(BookForm form) {
+    public void add(BookForm form) {
         Book book = new Book(form);
-        return bookRepository.save(book);
+        BookRepository.bookRepository.saveBook(book);
     }
     
     public void remove(Long id) {
-        bookRepository.deleteById(id);
+        BookRepository.bookRepository.deleteBook(id);
     }
 
     public void change(Long id) {
-        bookRepository.deleteById(id);//TODO: поменять на изменение
+        BookRepository.bookRepository.deleteBook(id);//TODO: поменять на изменение
     }
     
     public Optional<Book> getById(Long id) {
-        return bookRepository.findById(id);
+        return Optional.ofNullable(BookRepository.bookRepository.findByIdBook(id));
     }
     
     public Iterable<Book> getAllBooks() {
-        return bookRepository.findAll();
+        return BookRepository.bookRepository.findAllBooks();
     }
     
-    public Book save(Book book) {
-        return bookRepository.save(book);
+    public void save(Book book) {
+        BookRepository.bookRepository.saveBook(book);
     }
 }

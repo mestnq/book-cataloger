@@ -51,7 +51,7 @@ public class RESTController {
     }
     
     @PostMapping("/add")
-    private Book add(@RequestBody BookForm form) {
-        return bookService.add(form);
+    private void add(@RequestBody BookForm form) {
+        bookService.add(form);
     }
 }

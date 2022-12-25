@@ -3,16 +3,21 @@ package com.example.bookcataloger.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.NaturalId;
 
 import com.example.bookcataloger.form.BookForm;
 
 import java.io.Serializable;
 
 @Entity
+@Table(name = "book")
 public class Book implements Serializable {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NaturalId
     private String name;
     private String genre;
     private String took;
