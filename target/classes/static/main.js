@@ -17,14 +17,7 @@ window.onload = async function () {
                 window.location.href = '/';
             }
         });
-        $(".change").click(async (event) => {
-            const response = await fetch(`/api/change/${event.target.id}`, {
-                method: "POST", headers: {"Accept": "application/json"}
-            });
-            if (response.ok) {
-                window.location.href = '/';
-            }
-        });
+
         $(".update").click(async (event) => {
             await fetch(`/api/update/${event.target.id}`, {
                 method: "POST", headers: {"Accept": "application/json"}
@@ -41,7 +34,7 @@ window.onload = async function () {
         child.innerHTML += `${book.took} | `;
         child.innerHTML += `${book.returned} `;
         child.innerHTML += `<input type="button" class="remove" id="${book.id}" value="remove">`;
-        child.innerHTML += `<input type="button" class="change" id="${book.id}" value="change">`;
+        child.innerHTML += `<button type="button" onclick="window.location.href = '/change/${book.id}'">change</button>`;
         books.appendChild(child);
     }
 };

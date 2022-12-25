@@ -37,9 +37,9 @@ public class RESTController {
         bookService.remove(id);
     }
 
-    @PostMapping("/change/{id}")
-    private void change(@PathVariable("id") Long id) {
-        bookService.change(id);
+    @GetMapping("/change/{id}")
+    private void change(@PathVariable("id") Long id, @RequestBody BookForm form) {
+        bookService.change(id, form);
     }
     
     @PostMapping("/update/{id}")

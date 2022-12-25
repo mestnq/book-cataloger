@@ -23,8 +23,9 @@ public class BookService {
         BookRepository.bookRepository.deleteBook(id);
     }
 
-    public void change(Long id) {
-        BookRepository.bookRepository.deleteBook(id);//TODO: поменять на изменение
+    public void change(Long id, BookForm form) {
+        Book book = new Book(form);
+        BookRepository.bookRepository.changeBook(id, book);
     }
     
     public Optional<Book> getById(Long id) {
@@ -35,7 +36,7 @@ public class BookService {
         return BookRepository.bookRepository.findAllBooks();
     }
     
-    public void save(Book book) {
-        BookRepository.bookRepository.saveBook(book);
+    public Book save(Book book) {
+        return BookRepository.bookRepository.saveBook(book);
     }
 }
