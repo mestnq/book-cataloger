@@ -1,20 +1,16 @@
 package com.example.bookcataloger;
 
 import com.example.bookcataloger.controller.RESTController;
-import com.example.bookcataloger.model.Book;
 import com.example.bookcataloger.repository.BookRepository;
 import com.example.bookcataloger.service.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Optional;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -22,57 +18,36 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class IntegrationTests {
+public class IntegrationTests {
     @Autowired
     private RESTController restController;
     @Autowired
-    private BookRepository bookRepository;
-
+    private BookRepository repository;
     @Autowired
-    private BookService bookService;
-
-    @Test
-    void contextLoads() {
-    }
-
-    @Test
-    void rest() throws Exception {
-        assertThat(restController).isNotNull();
-    }
-
+    private BookService service;
     @Autowired
     private MockMvc mockMvc;
 
     @Test
-    public void listOfProducts() throws Exception {
-        this.mockMvc.perform(get("/api/"))
+    public void checkRest() {
+        assertThat(restController).isNotNull();
+    }
+
+    @Test
+    public void get() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders.get("/api/books"))
                 .andDo(print())
                 .andExpect(status().isOk());
     }
 
     @Test
-    public void getProductById() throws Exception { //TODO: нужен change
-        long id = 3;
-        Optional<Book> book = Optional.ofNullable(bookRepository.findByIdBook(id));
-
-        this.mockMvc.perform(get("/change/" + id)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\":3,\"name\":\"name\",\"bought\":\"false\"}"))
-                .andDo(print())
-                .andExpect(content().string(containsString(book.get().getName())));
+    public void postAdd() throws Exception {
+        String param = "";
+        this.mockMvc.perform(post("/api/books/add")
+                        .param("book-name", param)
+                        .param("book-genre", "")
+                        .param("book-took", "")
+                        .param("book-returned", ""))
+                .andExpect(status().isFound());
     }
-
-    @Test
-    public void postAddProduct() throws Exception { //TODO: нужен change
-        String bookName = "nameTest";
-        this.mockMvc.perform(post("/api/add")
-                        .param("bookName", bookName))
-                .andDo(print());
-
-        this.mockMvc.perform(get("/api/").contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(jsonPath("$[*].name", hasItem(bookName)));
-
-    }
-
 }
