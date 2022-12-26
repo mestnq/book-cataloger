@@ -34,34 +34,6 @@ public class RESTController {
     protected Optional<Book> listBooks(@PathVariable Long id) {
         return bookService.getById(id);
     }
-    
-//    @GetMapping("/{id}")
-//    private Optional<Book> getById(@PathVariable("id") Long id) {
-//        return bookService.getById(id);
-//    }
-//
-//    @PostMapping("/remove/{id}")
-//    private void delete(@PathVariable("id") Long id) {
-//        bookService.remove(id);
-//    }
-//
-//    @GetMapping("/change/{id}")
-//    private void change(@PathVariable("id") Long id, @RequestBody BookForm form) {
-//        bookService.change(id, form);
-//    }
-    
-//    @PostMapping("/update/{id}")
-//    private void update(@PathVariable("id") Long id) {
-//        bookService.getById(id).ifPresent(book -> {
-//            book.setBought(!book.isBought());
-//            bookService.save(book);
-//        });
-//    }
-    
-//    @PostMapping("/add")
-//    private void add(@RequestBody BookForm form) {
-//        bookService.add(form);
-//    }
 
     @PostMapping("/books/add")
     protected void addBook(HttpServletRequest req, HttpServletResponse resp) {

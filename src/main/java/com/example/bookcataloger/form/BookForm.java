@@ -1,7 +1,5 @@
 package com.example.bookcataloger.form;
 
-import com.example.bookcataloger.model.Book;
-
 public class BookForm {
     private Long id;
     private String name;

@@ -1,11 +1,9 @@
 package com.example.bookcataloger.service;
 
-import com.example.bookcataloger.model.Book;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.bookcataloger.form.BookForm;
+import com.example.bookcataloger.model.Book;
 import com.example.bookcataloger.repository.BookRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
