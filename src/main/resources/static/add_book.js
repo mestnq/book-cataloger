@@ -1,7 +1,7 @@
 window.onload = async function () {
     let elem = document.getElementById("add");
     elem.onclick = async function () {
-        await fetch("/api/add", {
+        await fetch("/api/books", {
             method: "POST",
             headers: {"Accept": "application/json", "Content-Type": "application/json"},
             body: JSON.stringify({

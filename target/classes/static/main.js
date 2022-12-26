@@ -1,40 +1,40 @@
 window.onload = async function () {
-    const response = await fetch("/api/", {
-        method: "GET", headers: {"Accept": "application/json"}
+    const response = await fetch("/api/books", {
+        method: "GET",
+        headers: {"Accept": "application/json", "Content-Type": "application/json"}
     });
-    if (response.ok) {
-        let list = await response.json();
-        for (let book of list) {
-            console.log(book);
+
+    console.log(response);
+    console.log(response.ok);
+    if (response.ok === true) {
+        let books = await response.json();
+        console.log(books);
+
+        for (let book of books) {
             add_book(book);
         }
-
-        $(".remove").click(async (event) => {
-            const response = await fetch(`/api/remove/${event.target.id}`, {
-                method: "POST", headers: {"Accept": "application/json"}
-            });
-            if (response.ok) {
-                window.location.href = '/';
-            }
-        });
-
-        $(".update").click(async (event) => {
-            await fetch(`/api/update/${event.target.id}`, {
-                method: "POST", headers: {"Accept": "application/json"}
-            });
-        });
     }
 
     function add_book(book) {
         let books = document.getElementById("books");
-        let child = document.createElement("div")
-        child.innerHTML += `<input type="checkbox" class="update" id="${book.id}" ${book.bought ? 'checked' : ''} value="${book.bought}">`
-        child.innerHTML += `${book.name} | `;
-        child.innerHTML += `${book.genre} | `;
-        child.innerHTML += `${book.took} | `;
-        child.innerHTML += `${book.returned} `;
-        child.innerHTML += `<input type="button" class="remove" id="${book.id}" value="remove">`;
-        child.innerHTML += `<button type="button" onclick="window.location.href = '/change/${book.id}'">change</button>`;
-        books.appendChild(child);
+        let row = document.createElement("tr");
+
+        let name = document.createElement("td");
+        name.innerHTML += `${book.name}`;
+        row.appendChild(name);
+
+        let desc = document.createElement("td");
+        desc.innerHTML += `${book.genre}`;
+        row.appendChild(desc);
+
+        let desc1 = document.createElement("td");
+        desc1.innerHTML += `${book.took}`;
+        row.appendChild(desc1);
+
+        let ret = document.createElement("td");
+        ret.innerHTML += `${book.returned}`;
+        row.appendChild(ret);
+
+        books.appendChild(row);
     }
-};
+}

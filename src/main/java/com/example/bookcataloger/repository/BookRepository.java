@@ -27,11 +27,29 @@ public class BookRepository {
         return book;
     }
 
+    public boolean updateBook(Book book) {
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.merge(book);
+            transaction.commit();
+            session.close();
+
+            return true;
+        }
+        catch (Exception ex) {
+            return false;
+        }
+    }
+
     public void deleteBook(Long id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        Book book = session.get(Book.class, id);
-        session.remove(book);
-        session.close();
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            Book book = session.get(Book.class, id);
+            session.remove(book);
+            transaction.commit();
+        }
+        catch (Exception ex) {
+        }
     }
 
     public void changeBook(Long id, Book book) {

@@ -31,6 +31,11 @@ public class BookService {
     public Optional<Book> getById(Long id) {
         return Optional.ofNullable(BookRepository.bookRepository.findByIdBook(id));
     }
+
+    public void updateBook(BookForm form) {
+        Book book = new Book(form);
+        BookRepository.bookRepository.updateBook(book);
+    }
     
     public Iterable<Book> getAllBooks() {
         return BookRepository.bookRepository.findAllBooks();

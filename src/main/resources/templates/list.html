@@ -8,11 +8,15 @@
     <script src="/main.js"></script>
 </head>
 <body>
-<h1>Book cataloger</h1>
-<div id="books">
-</div>
-<a href="/add">
-    <button>add</button>
-</a>
+<table id="books">
+    <tr>
+        <th>Название</th>
+        <th>Жанр</th>
+        <th>Кто взял</th>
+        <th>Кто вернул</th>
+    </tr>
+</table>
+<button type="button" onclick="window.location.href = '/add'">добавить</button>
+<button type="button" onclick="window.location.href = '/update'">изменить</button>
 </body>
 </html>

@@ -1,8 +1,10 @@
 package com.example.bookcataloger.form;
 
-public class BookForm {
-    private String name;
+import com.example.bookcataloger.model.Book;
 
+public class BookForm {
+    private Long id;
+    private String name;
     private String genre;
     private String returned;
     private String took;
@@ -16,7 +18,27 @@ public class BookForm {
         this.returned = returned;
         this.took = took;
     }
-    
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setReturned(String returned) {
+        this.returned = returned;
+    }
+
+    public void setTook(String took) {
+        this.took = took;
+    }
+
+
     public String getName() {
         return name;
     }

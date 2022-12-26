@@ -16,8 +16,7 @@ import java.io.Serializable;
 public class Book implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @NaturalId
+    private Long id = 0L;
     private String name;
     private String genre;
     private String took;
@@ -28,6 +27,7 @@ public class Book implements Serializable {
     }
     
     public Book(BookForm form) {
+        this.id = form.getId();
         this.name = form.getName();
         this.genre = form.getGenre();
         this.took = form.getTook();
